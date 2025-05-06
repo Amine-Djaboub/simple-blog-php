@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: blog-php
-          image: gcr.io/[PROJECT-ID]/simple-blog:v1
+          image: gcr.io/php-blog-k8s/simple-blog:v2
           imagePullPolicy: Always
           ports:
             - containerPort: 80
