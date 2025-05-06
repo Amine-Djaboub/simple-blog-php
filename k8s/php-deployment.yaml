@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-php
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blog-php
+  template:
+    metadata:
+      labels:
+        app: blog-php
+    spec:
+      containers:
+        - name: blog-php
+          image: aminedjaboub/simple_blog_php
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          #volumeMounts:
+          #  - name: html
+          #    mountPath: /var/www/html
+      #volumes:
+      #  - name: html
+      #    emptyDir: {} # Replace this with a PersistentVolume if needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-php
+spec:
+  selector:
+    app: blog-php
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
